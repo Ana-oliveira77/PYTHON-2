@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1696262345000,
+    "categoria": "Computador",
+    "marca": "DELL INSPIRON 15 3520 MODELO P112F",
+    "numeroPatrimonio": "NÃO POSSUI PATRIMÔNIO",
+    "ddd": "",
+    "numeroLinha": "",
+    "conta": "",
+    "serial": "SN-987654321",
+    "etiqueta": "ETQ-2025",
+    "status": "Em uso",
+    "dataRecebimento": "2023-05-10",
+    "dataEntrega": "2024-09-20",
+    "usuarioAtual": "CAMILA BARBOSA",
+    "unidadeAtual": "Obra Fortaleza",
+    "emailFuncionario": "camila.barbosa@empresa.com",
+    "termo": "Cautelado no CRTI",
+    "observacao": "Notebook em ótimo estado, bateria substituída em 2024.",
+    "antigosUsuarios": [
+      {
+        "nome": "João Lima",
+        "unidade": "Obra Salvador",
+        "email": "joao.lima@empresa.com"
+      },
+      {
+        "nome": "Maria Souza",
+        "unidade": "Obra Recife",
+        "email": "maria.souza@empresa.com"
+      }
+    ]
+  },
+  {
+    "id": 1696262350001,
+    "categoria": "Chip",
+    "marca": "Vivo",
+    "numeroPatrimonio": "",
+    "ddd": "85",
+    "numeroLinha": "99999-8888",
+    "conta": "Conta Corporativa 123",
+    "serial": "ICCID123456789",
+    "etiqueta": "",
+    "status": "Disponível",
+    "dataRecebimento": "2024-01-15",
+    "dataEntrega": "",
+    "usuarioAtual": "",
+    "unidadeAtual": "",
+    "emailFuncionario": "",
+    "termo": "",
+    "observacao": "Chip reserva para emergências.",
+    "antigosUsuarios": []
+  }
+]

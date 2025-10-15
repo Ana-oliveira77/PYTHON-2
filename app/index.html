@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Patrimônios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho com logo -->
+  <header class="header">
+  <div class="logo-container">
+    <img src="logo.jpg" alt="Logo Zocar Rio" class="logo">
+  </div>
+  <h1>Controle de Patrimônios e Periféricos</h1>
+</header>
+
+
+  <!-- Ações do sistema -->
+  <div class="form-container">
+    <button onclick="exportarJSON()">📥 Exportar JSON</button>
+    <input type="file" id="importarArquivo" onchange="importarJSON(event)">
+    <button onclick="exportarPDF()">📄 Exportar PDF</button>
+    <br><br>
+    <label>Filtrar por categoria:</label>
+    <select id="filtroCategoria" onchange="atualizarTabela()">
+      <option value="">Todas</option>
+      <option>Computador</option>
+      <option>Celular</option>
+      <option>Chip</option>
+      <option>Monitor</option>
+      <option>Tv</option>
+      <option>Periférico</option>
+    </select>
+  </div>
+
+  <!-- Cadastro de Funcionário -->
+  <div class="form-container">
+    <h2>Cadastro de Funcionário</h2>
+    <label>Nome:</label>
+    <input type="text" id="nomeFuncionario">
+    <label>Email:</label>
+    <input type="email" id="emailFuncionarioCadastro">
+    <label>Unidade/Obra:</label>
+    <input type="text" id="unidadeFuncionario">
+    <button onclick="cadastrarFuncionario()">Cadastrar Funcionário</button>
+  </div>
+
+  <!-- Cadastro de Patrimônio -->
+  <div class="form-container">
+    <h2>Cadastro de Patrimônio</h2>
+    <label>Categoria:</label>
+    <select id="categoria" onchange="atualizarFormulario()">
+      <option value="">Selecione...</option>
+      <option>Computador</option>
+      <option>Celular</option>
+      <option>Chip</option>
+      <option>Monitor</option>
+      <option>Tv</option>
+      <option>Periférico</option>
+    </select>
+
+    <div id="formCampos"></div>
+    <button id="btnSalvar" onclick="adicionarItem()">Adicionar</button>
+  </div>
+<!-- Modal de Transferência -->
+<div id="modalTransferencia" class="modal">
+  <div class="modal-content">
+    <h2>Transferência de Patrimônio</h2>
+    <p id="transferInfo"></p>
+    <label>Novo Funcionário:</label>
+    <select id="novoFuncionario"></select>
+    <br><br>
+    <button onclick="confirmarTransferencia()">Confirmar</button>
+    <button onclick="fecharTransferencia()">Cancelar</button>
+  </div>
+</div>
+
+  <!-- Tabela de Patrimônios -->
+  <table>
+    <thead>
+      <tr>
+        <th>Categoria</th>
+        <th>Marca</th>
+        <th>Patrimônio/Número</th>
+        <th>Serial</th>
+        <th>Etiqueta</th>
+        <th>Usuário Atual</th>
+        <th>Unidade/Obra</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Data Recebimento</th>
+        <th>Data Entrega</th>
+        <th>Termo</th>
+        <th>Observação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaItens"></tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+
+</html>
+
