@@ -2,9 +2,6 @@
 # EXERCÍCIO PRÁTICO - VISUALIZAÇÃO
 # ============================================================
 
-# -----------------------------
-# IMPORTS
-# -----------------------------
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,19 +10,12 @@ import plotly.express as px
 import plotly.io as pio
 import ast
 
-# comando mágico para notebooks (pode comentar se for .py)
 %matplotlib inline
 
-# -----------------------------
-# CARREGAR DADOS
-# -----------------------------
-# trabalhando com o wc_formatado.csv gerado no exercício anterior
+
 wc = pd.read_csv('wc_formatado.csv', parse_dates=['data'])
 
-# -----------------------------
-# TEMAS / ESTILOS
-# -----------------------------
-# Matplotlib
+
 plt.style.use('ggplot')
 
 # Seaborn
@@ -37,9 +27,6 @@ pio.templates.default = "plotly_white"
 
 # ============================================================
 # 1) HISTOGRAMA DO PÚBLICO (comparecimento)
-#    - remover jogos com comparecimento 0
-#    - fazer histograma nas 3 bibliotecas
-# ============================================================
 
 wc_publico = wc[wc['comparecimento'] > 0]
 
@@ -76,10 +63,7 @@ fig.show()
 
 
 # ============================================================
-# 2) SCATTER GOLS_1 x GOLS_2 COM LEVE DISTORÇÃO
-#    - gols = wc[['gols_1','gols_2']] * np.random.random((len(wc),2))
-#    - scatter nas 3 bibliotecas
-# ============================================================
+# 2) SCATTER GOLS_1 x GOLS_2 
 
 gols = wc[['gols_1', 'gols_2']] * np.random.random((len(wc), 2))
 
@@ -114,11 +98,8 @@ fig.show()
 
 # ============================================================
 # 3) TOP 10 PAÍSES QUE MAIS PARTICIPARAM DE COPAS
-#    - separar copas masculinas e femininas
-#    - barras empilhadas (stacked) nas 3 bibliotecas
-# ============================================================
 
-# monta dataframe de participações por país e tipo de copa
+
 part1 = wc[['time_1', 'ano', 'copa']].rename(columns={'time_1': 'país'})
 part2 = wc[['time_2', 'ano', 'copa']].rename(columns={'time_2': 'país'})
 participacoes = pd.concat([part1, part2], ignore_index=True).drop_duplicates()
@@ -130,20 +111,17 @@ participacao = (
     .reset_index(name='num_copas')
 )
 
-# pivot para ter colunas Masculina / Feminina
 participacao_pivot = (
     participacao
     .pivot(index='país', columns='copa', values='num_copas')
     .fillna(0)
 )
 
-# garante colunas na ordem desejada
 participacao_pivot = participacao_pivot.reindex(
     columns=['Masculina', 'Feminina'],
     fill_value=0
 )
 
-# total geral para pegar top 10
 participacao_pivot['total'] = participacao_pivot['Masculina'] + participacao_pivot['Feminina']
 top10 = participacao_pivot.sort_values('total', ascending=False).head(10)
 top10 = top10.sort_values('total', ascending=True)   # para plotar de forma mais bonita
@@ -153,7 +131,7 @@ masc = top10['Masculina']
 fem = top10['Feminina']
 x = np.arange(len(paises))
 
-# --- Matplotlib (barras empilhadas) ---
+# --- Matplotlib  ---
 plt.figure(figsize=(12, 6))
 plt.bar(x, masc, label='Masculina')
 plt.bar(x, fem, bottom=masc, label='Feminina')
@@ -165,7 +143,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# --- Seaborn (usando Matplotlib para empilhar, mas com tema do seaborn) ---
+# --- Seaborn  ---
 plt.figure(figsize=(12, 6))
 ax = plt.gca()
 ax.bar(x, masc, label='Masculina')
@@ -179,7 +157,7 @@ ax.legend()
 plt.tight_layout()
 plt.show()
 
-# --- Plotly (barras empilhadas) ---
+# --- Plotly  ---
 top10_plotly = top10.reset_index(names='país')
 fig = px.bar(
     top10_plotly,
@@ -201,7 +179,7 @@ fig.show()
 #     (2,2) barras com total de gols contra por ano
 # ============================================================
 
-# ---------- pré-processamento -----------
+
 
 # jogos por ano
 jogos_por_ano = wc.groupby('ano').size()
